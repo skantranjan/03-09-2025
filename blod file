@@ -17,3 +17,50 @@ src\pages\GeneratePdf.tsx
   Line 798:7:  React Hook "useFallbackData" is called in function "fetchMasterData" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use"  react-hooks/rules-of-hooks
 
 Search for the keywords to learn more about each error.
+
+
+
+
+
+package.json
+
+{
+  "name": "react-sustainability-portal",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "/ui",  // ← ADDED THIS LINE
+  "dependencies": {
+    // ... rest unchanged
+  }
+}
+
+
+
+
+
+src/App.tsx
+
+// BEFORE:
+<Router>
+
+// AFTER:
+<Router basename="/ui">  // ← ADDED basename="/ui"
+
+
+
+src/utils/api.ts
+
+// BEFORE:
+import CryptoJS from 'crypto-js';
+import moment from 'moment';
+
+// AFTER:
+import CryptoJS from 'crypto-js';
+import moment from 'moment';
+import { ENV_CONFIG } from '../config/environment';  // ← ADDED THIS IMPORT
+
+// BEFORE:
+BASE_URL: 'https://haleon-api-dev.apigee.net/Sustainibility-portal-channel/v1'
+
+// AFTER:
+BASE_URL: ENV_CONFIG.API_BASE_URL  // ← CHANGED TO USE ENVIRONMENT CONFIG
